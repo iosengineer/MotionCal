@@ -8,12 +8,12 @@ ALL = MotionCal imuread
 CC = gcc
 CXX = g++
 CFLAGS = -O2 -Wall -D$(OS)
-WXCONFIG = ~/wxwidgets/3.0.2.gtk2-opengl/bin/wx-config
+WXCONFIG = /usr/bin/wx-config
 WXFLAGS = `$(WXCONFIG) --cppflags`
 CXXFLAGS = $(CFLAGS) `$(WXCONFIG) --cppflags`
 LDFLAGS =
 SFLAG = -s
-CLILIBS = -lglut -lGLU -lGL -lm
+CLILIBS = -lGL -lGLU -lglut -lm
 MAKEFLAGS = --jobs=12
 
 else ifeq ($(OS), MACOSX)
@@ -66,7 +66,8 @@ IMGS = checkgreen.png checkempty.png checkemptygray.png
 all: $(ALL)
 
 MotionCal: gui.o portlist.o images.o $(OBJS)
-	$(CXX) $(SFLAG) $(CFLAGS) $(LDFLAGS) -o $@ $^ `$(WXCONFIG) --libs all,opengl`
+	$(CXX) $(SFLAG) $(CFLAGS) $(LDFLAGS) -o $@ $^ -L/usr/lib/x86_64-linux-gnu -pthread   -lwx_gtk3u_xrc-3.0 -lwx_gtk3u_stc-3.0 -lwx_gtk3u_richtext-3.0 -lwx_gtk3u_ribbon-3.0 -lwx_gtk3u_propgrid-3.0 -lwx_gtk3u_aui-3.0 -lwx_gtk3u_gl-3.0 -lwx_gtk3u_media-3.0 -lwx_gtk3u_html-3.0 -lwx_gtk3u_qa-3.0 -lwx_gtk3u_adv-3.0 -lwx_gtk3u_core-3.0 -lwx_baseu_xml-3.0 -lwx_baseu_net-3.0 -lwx_baseu-3.0 -lGL -lGLU -lglut -lm
+	#`$(WXCONFIG) --libs all,opengl`
 
 MotionCal.exe: resource.o gui.o portlist.o images.o $(OBJS)
 	$(CXX) $(SFLAG) $(CFLAGS) $(LDFLAGS) -o $@ $^ `$(WXCONFIG) --libs all,opengl`

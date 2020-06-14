@@ -31,7 +31,7 @@
 
 
 #if defined(LINUX)
-  #define PORT "/dev/ttyACM0"
+  #define PORT "/dev/ttyUSB0"
 #elif defined(WINDOWS)
   #define PORT "COM3"
 #elif defined(MACOSX)
